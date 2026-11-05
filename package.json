@@ -1,0 +1,46 @@
+{
+  "name": "@workspace/claim-constructor",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Source-linked, AI-assisted patent claim interpretation with inspectable text and drawing evidence.",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/core/contracts.ts",
+    "./server": "./src/server/router.ts",
+    "./quota": "./src/server/quota.ts",
+    "./ui": "./src/ui/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test test/*.test.ts",
+    "dev": "tsx standalone/server.ts",
+    "build": "vite build --config standalone/vite.config.ts",
+    "start": "tsx standalone/server.ts"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "openai": "^6.32.0",
+    "pg": "^8.22.0",
+    "sharp": "^0.34.5",
+    "zod": "^3.25.76"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.3",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "pdfjs-dist": "^5.4.624",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.2"
+  }
+}
