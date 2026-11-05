@@ -40,7 +40,9 @@ export async function prepareDocument(input: DocumentInput, client: OpenAI, secr
   const warnings = input.inputType === "text"
     ? ["Pasted text has no drawings. Figure references cannot be visually verified."]
     : ["Page images are reduced for this bounded demo. Inspect the original PDF for small details."];
-  const scannedPages = pages.filter(page => page.text.trim().length < 80);
+  const scannedPages = input.inputType === "pdf"
+    ? pages.filter(page => page.imageDataUrl && page.text.trim().length < 80)
+    : [];
   if (scannedPages.length) {
     warnings.push("Some pages required visual transcription. OCR and drawing labels may be uncertain; inspect the original.");
     const response = await client.chat.completions.create({
