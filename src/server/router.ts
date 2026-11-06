@@ -25,38 +25,43 @@ export function createClaimConstructorRouter(options: DemoRouterOptions): IRoute
   // Parse locally, ahead of the platform's smaller JSON parser.
   router.use(express.json({ limit: "18mb" }));
 
-  function handle(action: "prepare" | "analyze") {
+  function createRequestHandler(action: "prepare" | "analyze") {
     return async (request: Request, response: Response) => {
-      let release: (() => Promise<void>) | undefined;
+      let releaseConcurrencyLease: (() => Promise<void>) | undefined;
       try {
         // Validate untrusted input before consuming daily capacity or contacting the model.
-        const preparedInput = action === "prepare" ? documentInputSchema.parse(request.body) : undefined;
+        const preparationInput = action === "prepare" ? documentInputSchema.parse(request.body) : undefined;
         const analysisInput = action === "analyze" ? analysisRequestSchema.parse(request.body) : undefined;
         if (analysisInput) verifyDocument(analysisInput.document, options.signingSecret);
         // Deliberately use the peer address, not arbitrary client-supplied forwarded headers.
         // Shared proxy addresses may share a visitor allowance; the global DB budget remains authoritative.
-        release = await options.reserve(request.socket.remoteAddress || "unknown-peer");
-        const result = preparedInput
-          ? await prepareDocument(preparedInput, options.client, options.signingSecret)
-          : await analyzeDocument(analysisInput!.document, analysisInput!.claimNumber, options.client);
-        response.json(result);
+        releaseConcurrencyLease = await options.reserve(request.socket.remoteAddress || "unknown-peer");
+        if (preparationInput) {
+          const preparedDocument = await prepareDocument(preparationInput, options.client, options.signingSecret);
+          response.json(preparedDocument);
+        } else if (analysisInput) {
+          const claimInterpretation = await analyzeDocument(analysisInput.document, analysisInput.claimNumber, options.client);
+          response.json(claimInterpretation);
+        } else {
+          throw new Error("The request handler received no validated input.");
+        }
       } catch (error) {
         if (error instanceof DemoError) {
           if (error.status === 429) response.setHeader("Retry-After", "3600");
           response.status(error.status).json({ error: error.message });
-        } else if (error instanceof ZodError && !release) {
+        } else if (error instanceof ZodError && !releaseConcurrencyLease) {
           response.status(400).json({ error: error.issues[0]?.message || "Invalid document." });
         } else {
           options.reportFailure?.(`claim-demo-${action}-failed`);
           response.status(503).json({ error: "The demo could not complete this request. Try again later or use a clearer document. No result was saved." });
         }
       } finally {
-        await release?.().catch(() => options.reportFailure?.("claim-demo-lease-release-failed"));
+        await releaseConcurrencyLease?.().catch(() => options.reportFailure?.("claim-demo-lease-release-failed"));
       }
     };
   }
-  router.post("/prepare", handle("prepare"));
-  router.post("/analyze", handle("analyze"));
+  router.post("/prepare", createRequestHandler("prepare"));
+  router.post("/analyze", createRequestHandler("analyze"));
   router.use((error: { type?: string }, _request: Request, response: Response, _next: NextFunction) => {
     response.status(error.type === "entity.too.large" ? 413 : 400).json({ error: "Invalid or oversized request. Maximum request size is 18 MB." });
   });

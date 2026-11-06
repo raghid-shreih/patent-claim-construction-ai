@@ -9,14 +9,16 @@
     ".": "./src/core/contracts.ts",
     "./server": "./src/server/router.ts",
     "./quota": "./src/server/quota.ts",
-    "./ui": "./src/ui/index.ts"
+    "./ui": "./src/ui/index.ts",
+    "./brand": "./src/ui/brand/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
+    "brand:assets": "tsx scripts/build-brand-assets.ts",
     "test": "tsx --test test/*.test.ts",
-    "dev": "tsx standalone/server.ts",
+    "dev": "tsx --env-file-if-exists=.env standalone/server.ts",
     "build": "vite build --config standalone/vite.config.ts",
-    "start": "tsx standalone/server.ts"
+    "start": "tsx --env-file-if-exists=.env standalone/server.ts"
   },
   "dependencies": {
     "express": "^5.2.1",

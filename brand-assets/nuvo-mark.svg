@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- NuvoPatents claim-bracket mark. Editable 64-unit geometry. -->
+  <path id="left-claim-bracket" d="M27 8H8V56H27V48H16V16H27Z" fill="#2563eb"/>
+  <path id="connecting-diagonal" d="M8 8H19L56 56H45Z" fill="#2563eb"/>
+  <path id="right-claim-bracket" d="M37 8H56V56H37V48H48V16H37Z" fill="#2563eb"/>
+</svg>

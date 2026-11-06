@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" fill="#f1f5f9"/>
+  <g font-family="Inter, DejaVu Sans, sans-serif" fill="#0f172a">
+    <text x="48" y="56" font-size="13" letter-spacing="2" fill="#2563eb">NUVOPATENTS / BRAND MARK</text>
+    <text x="48" y="103" font-size="30" font-weight="600">An N, framed by claim brackets.</text>
+    <rect x="48" y="140" width="540" height="252" rx="16" fill="white"/>
+    <g transform="translate(76 216) scale(1.25)"><path d="M27 8H8V56H27V48H16V16H27Z" fill="#2563eb"/><path d="M8 8H19L56 56H45Z" fill="#2563eb"/><path d="M37 8H56V56H37V48H48V16H37Z" fill="#2563eb"/></g>
+    <text x="176" y="271" font-size="39" font-weight="600">NuvoPatents</text>
+    <text x="80" y="357" font-size="13" fill="#64748b">PRIMARY BLUE / WHITE BACKGROUND</text>
+    <rect x="612" y="140" width="540" height="252" rx="16" fill="#0f172a"/>
+    <g transform="translate(640 216) scale(1.25)"><path d="M27 8H8V56H27V48H16V16H27Z" fill="#ffffff"/><path d="M8 8H19L56 56H45Z" fill="#ffffff"/><path d="M37 8H56V56H37V48H48V16H37Z" fill="#ffffff"/></g>
+    <text x="740" y="271" font-size="39" font-weight="600" fill="white">NuvoPatents</text>
+    <text x="644" y="357" font-size="13" fill="#cbd5e1">REVERSED / SLATE BACKGROUND</text>
+    <rect x="48" y="416" width="540" height="232" rx="16" fill="white"/>
+    <text x="80" y="453" font-size="13" fill="#64748b">GRAPHIC-ONLY VECTORS</text>
+    <g transform="translate(80 480) scale(1.4)"><path d="M27 8H8V56H27V48H16V16H27Z" fill="#2563eb"/><path d="M8 8H19L56 56H45Z" fill="#2563eb"/><path d="M37 8H56V56H37V48H48V16H37Z" fill="#2563eb"/></g>
+    <g transform="translate(226 480) scale(1.4)"><path d="M27 8H8V56H27V48H16V16H27Z" fill="#0f172a"/><path d="M8 8H19L56 56H45Z" fill="#0f172a"/><path d="M37 8H56V56H37V48H48V16H37Z" fill="#0f172a"/></g>
+    <rect x="378" y="484" width="92" height="92" rx="12" fill="#0f172a"/>
+    <g transform="translate(379 485) scale(1.4)"><path d="M27 8H8V56H27V48H16V16H27Z" fill="#ffffff"/><path d="M8 8H19L56 56H45Z" fill="#ffffff"/><path d="M37 8H56V56H37V48H48V16H37Z" fill="#ffffff"/></g>
+    <text x="80" y="615" font-size="13" fill="#64748b">BLUE</text>
+    <text x="232" y="615" font-size="13" fill="#64748b">INK</text>
+    <text x="378" y="615" font-size="13" fill="#64748b">WHITE</text>
+    <rect x="612" y="416" width="540" height="232" rx="16" fill="white"/>
+    <text x="644" y="453" font-size="13" fill="#64748b">BROWSER ICONS / ACTUAL DISPLAY SIZES</text>
+    <g transform="translate(644 509) scale(.25)"><rect width="64" height="64" rx="12" fill="#2563eb"/><path d="M27 8H8V56H27V48H16V16H27Z" fill="#ffffff"/><path d="M8 8H19L56 56H45Z" fill="#ffffff"/><path d="M37 8H56V56H37V48H48V16H37Z" fill="#ffffff"/></g>
+    <g transform="translate(740 501) scale(.5)"><rect width="64" height="64" rx="12" fill="#2563eb"/><path d="M27 8H8V56H27V48H16V16H27Z" fill="#ffffff"/><path d="M8 8H19L56 56H45Z" fill="#ffffff"/><path d="M37 8H56V56H37V48H48V16H37Z" fill="#ffffff"/></g>
+    <g transform="translate(850 493) scale(.75)"><rect width="64" height="64" rx="12" fill="#2563eb"/><path d="M27 8H8V56H27V48H16V16H27Z" fill="#ffffff"/><path d="M8 8H19L56 56H45Z" fill="#ffffff"/><path d="M37 8H56V56H37V48H48V16H37Z" fill="#ffffff"/></g>
+    <text x="644" y="571" font-size="13" fill="#64748b">16 PX</text>
+    <text x="740" y="571" font-size="13" fill="#64748b">32 PX</text>
+    <text x="850" y="571" font-size="13" fill="#64748b">48 PX</text>
+    <text x="644" y="615" font-size="13" fill="#64748b">SVG + PNG + MULTI-SIZE ICO + TOUCH ICON</text>
+    <text x="48" y="703" font-size="15" fill="#475569">The name remains selectable HTML text. The mark contains no fonts or lettering.</text>
+  </g>
+</svg>

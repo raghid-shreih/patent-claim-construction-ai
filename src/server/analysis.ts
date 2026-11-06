@@ -91,11 +91,13 @@ Do not import a limitation from one embodiment or drawing unless the claim/speci
 Distinguish explicit definitions, contextual inference, visual observation, unsupported meaning, and ambiguity.
 Alternative multiple dependencies must be discussed as alternatives, not combined as simultaneous mandatory limitations.
 Return JSON {"summary":string,"terms":[{"term":string,"meaning":string,"basis":"explicit"|"contextual"|"visual"|"unsupported","evidence":[{"sourceId":string,"quote":string}],"caveat":string}],"warnings":string[]}.
-Use 3-10 material terms appearing verbatim in the claim or inherited claims. Summary must explain the claim plainly in context, inherited limitations and uncertainty.
+Use 3-10 material terms appearing verbatim in the claim or inherited claims. Summary must explain the claim plainly in context, inherited limitations and substantive uncertainty.
+Keep summary focused on what the claimed invention does and requires. Do not include legal-advice disclaimers, requests for human/professional review, or boilerplate about AI or machine-checked quotations in summary, warnings, or term explanations; the interface provides a separate legal and human-review notice.
+Preserve substantive ambiguity, missing support, alternative readings, and document-specific limitations in the relevant terms and warnings.
 Text citations must quote an EXACT supplied substring of at least 8 characters, with the supplied sourceId.
 For visual observations cite only page-N-image, set quote to empty string, and explain observable structure, not invented text. Never invent figure numbers. Include any visible figure identifier in caveat; if none is legible say page-level visual reference only.
 If there is no support, evidence must be empty, basis unsupported, meaning must explicitly state uncertainty.
-Explain that quotations are machine-checked but legal reasoning and visual observations still need human review.` },
+Do not modify or paraphrase quoted source text.` },
       { role: "user", content: [
         { type: "text", text: JSON.stringify({
           selectedClaim, inheritedClaims,

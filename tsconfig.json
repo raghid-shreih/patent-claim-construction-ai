@@ -3,6 +3,7 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
     "jsx": "react-jsx",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["node", "vite/client"],
@@ -11,5 +12,5 @@
     "esModuleInterop": true,
     "noEmit": true
   },
-  "include": ["src", "standalone", "test"]
+  "include": ["src", "standalone", "test", "docs/illustrations"]
 }

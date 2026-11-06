@@ -4,7 +4,8 @@ import express from "express";
 import type OpenAI from "openai";
 import sharp from "sharp";
 import { createClaimConstructorRouter } from "../src/server/router";
-import { normalizePageImages, prepareDocument } from "../src/server/analysis";
+import { analyzeDocument, normalizePageImages, prepareDocument } from "../src/server/analysis";
+import { signDocument } from "../src/core/document";
 import { DemoError } from "../src/core/contracts";
 
 const input = {
@@ -12,6 +13,33 @@ const input = {
   pages: [{ pageNumber: 1, text: "DESCRIPTION\n\n[0001] A coupling is a detachable connector between two parts.\n\nCLAIMS\n1. A system comprising a coupling." }],
 };
 const secret = "router-test-secret-for-stateless-document-signatures";
+
+test("analysis instructions separate legal boilerplate from substantive claim uncertainty", async () => {
+  const document = signDocument({ ...input, inputType: "text" }, secret, []);
+  const source = document.sources.find(passage => passage.text.includes("detachable connector"))!;
+  const fakeClient = { chat: { completions: { create: async (request: {
+    messages: Array<{ role: string; content: unknown }>;
+  }) => {
+    const instructions = String(request.messages.find(message => message.role === "system")?.content);
+    assert.match(instructions, /Do not include legal-advice disclaimers/);
+    assert.match(instructions, /Preserve substantive ambiguity/);
+    assert.match(instructions, /Do not modify or paraphrase quoted source text/);
+    return { choices: [{ finish_reason: "stop", message: { content: JSON.stringify({
+      summary: "A system that uses a detachable connector.",
+      terms: [{
+        term: "coupling", meaning: "A detachable connector.", basis: "explicit",
+        evidence: [{ sourceId: source.id, quote: "A coupling is a detachable connector" }], caveat: "",
+      }],
+      warnings: ["The specification does not specify the connector material."],
+    }) } }] };
+  } } } } as unknown as OpenAI;
+  const interpretation = await analyzeDocument(document, 1, fakeClient);
+  assert.equal(interpretation.summary, "A system that uses a detachable connector.");
+  assert.match(interpretation.disclaimer, /legal advice/);
+  assert.match(interpretation.disclaimer, /human review/);
+  assert.ok(interpretation.warnings.includes("The specification does not specify the connector material."));
+  assert.equal(interpretation.terms[0].evidence[0].quote, "A coupling is a detachable connector");
+});
 
 test("public prepare/analyze require no auth, validate receipts, and do not persist documents", async () => {
   let reservedCount = 0;

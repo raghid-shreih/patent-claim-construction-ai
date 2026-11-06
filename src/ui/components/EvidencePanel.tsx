@@ -1,6 +1,6 @@
 import type { ClaimDocument, ClaimTermInterpretation } from "../contract-types";
 import type { LoadedPdfDocument } from "../pdf/pdf-runtime";
-import { BASIS_DESCRIPTIONS, BasisBadge } from "./BasisBadge";
+import { BASIS_DESCRIPTIONS } from "./BasisBadge";
 import { HighlightedPassage } from "./HighlightedPassage";
 import { PdfPageCanvas } from "./PdfPageCanvas";
 
@@ -42,10 +42,6 @@ export function EvidencePanel({
   return (
     <div className="ncc-evidence" aria-live="polite">
       <header className="ncc-evidence-head">
-        <span className="ncc-eyebrow">Term under inspection</span>
-        <h3 className="ncc-evidence-term">{selectedTerm.term}</h3>
-        <BasisBadge basis={selectedTerm.basis} />
-        <p className="ncc-evidence-meaning">{selectedTerm.meaning}</p>
         <p className="ncc-muted ncc-small">{BASIS_DESCRIPTIONS[selectedTerm.basis].explanation}</p>
         {selectedTerm.caveat && <p className="ncc-caveat">{selectedTerm.caveat}</p>}
       </header>

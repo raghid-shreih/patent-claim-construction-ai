@@ -1,7 +1,7 @@
 import { normalizeWhitespace } from "./document";
 import type { ClaimDocument, ClaimInterpretation, ProposedAnalysis, DetectedClaim } from "./contracts";
 
-export const LEGAL_DISCLAIMER = "AI-assisted, specification-based proposed interpretation, not a binding legal construction or legal advice. No prosecution-history review, case-law research, or jurisdiction-specific opinion. Verify with qualified patent counsel.";
+export const LEGAL_DISCLAIMER = "AI-assisted, specification-based proposed interpretation, not a binding legal construction or legal advice. Quotations are machine-checked, but legal reasoning and visual observations require human review and may be wrong. No prosecution-history review, case-law research, or jurisdiction-specific opinion. Verify with qualified patent counsel.";
 
 export function validateEvidence(
   analysis: ProposedAnalysis,
